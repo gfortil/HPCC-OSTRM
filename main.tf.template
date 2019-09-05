@@ -1,7 +1,7 @@
 provider "openstack" {}
 
 module "openstack-hpcc" {
-    source = "/home/godji/cloud/openstack-ops/o7boca/HPCC-Terraform"
+    source = "https://github.com/gfortil/HPCC-OSTAM"
 
  
     #|||| HPCC UPGRADE
