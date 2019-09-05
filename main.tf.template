@@ -1,0 +1,73 @@
+provider "openstack" {}
+
+module "openstack-hpcc" {
+    source = "/home/godji/cloud/openstack-ops/o7boca/HPCC-Terraform"
+
+ 
+    #|||| HPCC UPGRADE
+    hpcc_version    = "7.4.16"
+    hpcc_release    = "rc1"
+    hpcc_package    = "ln" 
+    build_server     = "10.0.2.16"
+    #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+    # Changes bellow this point might result in lost of data 
+    # Changes denoted with * will result in lost of data except variables count
+
+    # *_Cluster
+    #----------------------------------------------------------------------
+    image_name      = "CentOS-7-x86_64"
+    image_id        = ""
+    key_pair        = ""
+    subnet_name     = ""
+    network_name    = ""
+
+    ## Set timezone
+    timezone        = "New_York"
+
+    ## Create dropzone directories based on username
+    mydropzone_folder_names      = ["mydropzone", "godji"] 
+
+    ## Open TCP Ports
+    from_port       = 6000
+    to_port         = 9000
+
+    ## *_Mount drives
+    device          = "/dev/vdb"
+    mountpoint      = "/mnt/vdb"
+    
+    # *_Disk
+    #----------------------------------------------------------------------
+    master_disk     = 500
+    slave_disk      = 500
+    esp_disk        = 20
+    backup_disk     = 500
+    lzone_disk      = 1000
+    dali_disk       = 500
+
+    # *_Master
+    #----------------------------------------------------------------------
+    master_flavor_name  = "r5.large"
+
+    # *_Slave
+    #----------------------------------------------------------------------
+    slave_count = 10
+    slave_flavor_name = "r5.large"
+
+    # *_Backup Node
+    #----------------------------------------------------------------------
+    backup_count        = 2
+    backup_flavor_name  = "r5.large"
+
+    # *_Dali
+    #----------------------------------------------------------------------
+    dali_flavor_name = "r5.large"
+
+    # *_Landing Zone
+    #----------------------------------------------------------------------
+    lzone_flavor_name = "r5.large"
+
+    # *_ESP
+    #----------------------------------------------------------------------
+    esp_flavor_name  = "r5.large"
+}
