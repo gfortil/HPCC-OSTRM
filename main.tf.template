@@ -1,7 +1,7 @@
 provider "openstack" {}
 
 module "openstack-hpcc" {
-    source = "https://github.com/gfortil/HPCC-OSTAM"
+    source = "../HPCC-OSTAM"
 
  
     #|||| HPCC UPGRADE
